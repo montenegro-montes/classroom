@@ -1,0 +1,199 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[spanish,activeacute,es-tabla]{babel}
+\usepackage[utf8x]{inputenc} % mac utf8
+\usepackage{amsfonts}
+\usepackage{minted}
+\usepackage{ucs}
+\usepackage{hyperref}
+
+
+\begin{document}
+
+\title{\textit{Teoría de la Información y Codificación}\\ \textbf{Práctica 3: Huffman como algoritmo de compresión}}
+\author{José A. Montenegro Montes}
+
+\maketitle
+
+
+\section{Enunciado}
+
+En esta práctica utilizaremos el algoritmo de Huffman para comprimir, basándonos en la codificación por símbolos.
+
+Esta práctica será de utilidad para comparar posteriormente los algoritmos de compresión en bloques. 
+
+La práctica está basada en el código del libro Algorithms 4 Edición(Autores Robert Sedgewick y Kevin Wayne), que puede ser consultado en \href{http://jabega.uma.es/search~S4*spi?/tAlgorithms/talgorithms/1%2C148%2C170%2CB/frameset&FF=talgorithms&4%2C%2C6#}{biblioteca}.
+
+
+
+\section{Conclusiones}
+
+Además de realizar la comparativa con los códigos en bloques, la práctica ofrece un ejemplo de lectura y escritura binaria y cómo es posible utilizar la librería diffutils.
+
+El algoritmo es aplicado a los tres libros disponibles en el campus virtual: \textbf{Alice.txt}, \textbf{MobyDick.txt} y \textbf{Quixote.txt}. La práctica genera el archivo comprimido con el sufijo C.txt y el archivo descomprimido con el sufijo D.txt. Los sufijos puede ser modificados en el código. Por ejemplo, con la ejecución sobre el libro Alice.txt obtendremos Alice.txtC.txt como archivo comprimido y Alice.txtD.txt como archivo descomprimido.
+
+Además de utilizar los libros anteriormente citados, sería interesante aplicar la práctica a un \textbf{documento aleatorio} y comparar su salida posteriormente con la codificación en bloques.
+
+La salida del programa será la siguiente por defecto la siguiente:
+\footnotesize
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{csharp}
+ 
+ 
+********************** 	 Alice.txt 	 **********************
+Size regular: 152146 Size compress: 87816 Ratio: 0.5771825
+Fichero Descomprimido correctamente!!! Size regular: 152146 Size decompress: 152146
+Tiempo Comprimir: 65872000 nanosegundos. Tiempo Descomprimir: 56971000 nanosegundos.
+****************************************************************
+ 
+\end{minted}
+\normalsize
+donde nos ofrecen información del ratio de compresión, el tiempo utilizado en comprimir y descomprimir. Además verificamos que el archivo descomprimido es igual al original. 
+
+Si ejecutamos la aplicación con la opción de estadísticas habilitada, nos mostrará la codificación utilizada, frecuencias y probabilidades de los caracteres del texto y finalmente la entropía y la longitud media obtenida.
+
+\footnotesize
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{csharp}
+ 
+ 
+********************** 	 Alice.txt 	 **********************
+Size regular: 152146 Size compress: 87816 Ratio: 0.5771825
+Fichero Descomprimido correctamente!!! Size regular: 152146 Size decompress: 152146
+Tiempo Comprimir: 65872000 nanosegundos. Tiempo Descomprimir: 56971000 nanosegundos.
+****************************************************************
+
+
+Caracter  (Frecuencia - Probabilidad) 	 Codificacion
+------------------------------------------------------
+10	 (3601 - 0.023668056)   01000
+13	 (3601 - 0.023668056)   01001
+26	 (1 - 6.572634E-6)   01011100110010010
+32	 (28917 - 0.19006087)   00
+33	 (450 - 0.0029576854)   111011011
+34	 (113 - 7.4270763E-4)   11101101010
+39	 (1763 - 0.011587554)   1110111
+40	 (56 - 3.680675E-4)   111011001111
+41	 (55 - 3.6149487E-4)   111011001110
+42	 (60 - 3.9435804E-4)   01011100100
+44	 (2418 - 0.015892629)   100111
+45	 (669 - 0.0043970924)   11000010
+46	 (978 - 0.0064280364)   0101011
+48	 (1 - 6.572634E-6)   01011100110011000
+51	 (1 - 6.572634E-6)   01011100110011001
+58	 (233 - 0.0015314238)   010101000
+59	 (194 - 0.0012750911)   1110110000
+63	 (202 - 0.0013276722)   1110110010
+65	 (638 - 0.0041933404)   10011011
+66	 (91 - 5.9810973E-4)   11000011001
+67	 (145 - 9.5303194E-4)   1001101001
+68	 (192 - 0.0012619458)   1100001111
+69	 (188 - 0.0012356553)   1100001110
+70	 (74 - 4.8637492E-4)   10011010100
+71	 (83 - 5.4552866E-4)   10011010111
+72	 (284 - 0.0018666281)   010111011
+73	 (733 - 0.004817741)   11000110
+74	 (8 - 5.2581072E-5)   0101110011000
+75	 (82 - 5.38956E-4)   10011010110
+76	 (98 - 6.441182E-4)   11101100110
+77	 (200 - 0.0013145269)   1110110001
+78	 (120 - 7.887161E-4)   0101110000
+79	 (176 - 0.0011567837)   1100001101
+80	 (65 - 4.272212E-4)   01011100101
+81	 (84 - 5.521013E-4)   11000011000
+82	 (140 - 9.2016876E-4)   0101110101
+83	 (218 - 0.0014328342)   1110110100
+84	 (472 - 0.0031022832)   01010101
+85	 (66 - 4.3379384E-4)   01011100111
+86	 (42 - 2.7605065E-4)   010111001101
+87	 (237 - 0.0015577143)   010101001
+88	 (4 - 2.6290536E-5)   010111001100101
+89	 (114 - 7.4928027E-4)   11101101011
+90	 (1 - 6.572634E-6)   01011100110010011
+91	 (2 - 1.3145268E-5)   0101110011001000
+93	 (2 - 1.3145268E-5)   0101110011001101
+95	 (4 - 2.6290536E-5)   010111001100111
+96	 (1109 - 0.007289051)   1001100
+97	 (8153 - 0.053586688)   0111
+98	 (1384 - 0.009096526)   1100000
+99	 (2254 - 0.014814718)   100001
+100	 (4739 - 0.031147713)   10010
+101	 (13386 - 0.08798128)   1101
+102	 (1927 - 0.012665466)   010110
+103	 (2448 - 0.016089808)   101001
+104	 (7090 - 0.046599977)   11111
+105	 (6781 - 0.044569034)   11100
+106	 (138 - 9.070235E-4)   0101110100
+107	 (1076 - 0.0070721544)   0101111
+108	 (4618 - 0.030352425)   10001
+109	 (1907 - 0.012534013)   010100
+110	 (6896 - 0.045324884)   11110
+111	 (7970 - 0.052383896)   0110
+112	 (1459 - 0.009589474)   1100010
+113	 (125 - 8.2157925E-4)   0101110001
+114	 (5297 - 0.034815244)   10101
+115	 (6282 - 0.04128929)   11001
+116	 (10217 - 0.067152604)   1011
+117	 (3402 - 0.022360101)   111010
+118	 (804 - 0.005284398)   11000111
+119	 (2438 - 0.016024083)   101000
+120	 (144 - 9.464593E-4)   1001101000
+121	 (2149 - 0.014124591)   100000
+122	 (77 - 5.0609285E-4)   10011010101
+
+Entropia:       4.5675883
+Longitud Media: 4.6123915
+ 
+\end{minted}
+
+
+
+\section{Código}
+
+
+\subsection*{Clase FuenteFile.} 
+
+\inputminted[mathescape,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{java}{practica3/FuenteFile.java}
+
+               %%%%%%%%%%%%%%%%%%%%%%%
+ 
+\subsection*{Clase Huffman.} 
+\inputminted[mathescape,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{java}{practica3/Huffman.java}
+               
+%%%%%%
+\subsection*{Clase MinPQ.} 
+\inputminted[mathescape,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{java}{practica3/MinPQ.java}
+               
+%%%%%%
+ 
+\subsection*{Clase BinaryIn.} 
+\inputminted[mathescape,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{java}{practica3/BinaryIn.java}
+               
+%%%%%%
+\subsection*{Clase BinaryOut.} 
+\inputminted[mathescape,
+               numbersep=5pt,
+               frame=lines,
+               framesep=2mm]{java}{practica3/BinaryOut.java}
+               
+%%%%%%
+
+\end{document}
