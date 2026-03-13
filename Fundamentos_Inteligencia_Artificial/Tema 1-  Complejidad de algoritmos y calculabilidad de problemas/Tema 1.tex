@@ -343,7 +343,7 @@ El funcionamiento de un programa WHILE consiste, dado que es un modelo basado en
 
 
 \begin{itemize}
-    \item  Respecto a la sentencia de control (while), ésta primero comprueba si la variable de control que aparece en su cabecera es distinta de cero; si es así ejecutará el código que compone el cuerpo del bucle, tras lo cual volverá a comprobar la variable. Esto se repetirá mientras dicha variable sea distinta de cero cada vez que sea comprobada.
+
     \item Si en una de las comprobaciones vale cero la sentencia while termina.
     \item Podemos por tanto asociar una única función de $N^n$ en N a cada programa WHILE, \textbf{función calculada por un programa WHILE}.
     \item Función puede ser \textbf{parcial}, ya que puede haber entradas para las cuales el programa no termina (diverge).
@@ -1547,7 +1547,7 @@ $T_Q(n)$ = $\uparrow \forall \in N$ y $F_Q(n) = \uparrow \forall \in N$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]\frametitle{Función WHILE-computable, F(WHILE)} \footnotesize
 
-\begin{block}{Definición 14:  Función WHILE-computable, F(WHILE)}
+\begin{block}{Definición 15:  Función WHILE-computable, F(WHILE)}
 \end{block}
 
 
@@ -1562,7 +1562,7 @@ Diremos que f es una función WHILE-computable sii existe un programa WHILE Q ta
 \end{itemize}
 
 
-\begin{block}{Definición 15:  T-WHILE}
+\begin{block}{Definición 16:  T-WHILE}
 \end{block}
  
 T-WHILE = \{ $f\in F(WHILE)$ | f es total \}
@@ -1572,7 +1572,7 @@ T-WHILE = \{ $f\in F(WHILE)$ | f es total \}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[fragile]\frametitle{Predicado WHILE-decidible, PRED(T-WHILE)} \footnotesize
 
-\begin{block}{Definición 16:  P es un predicado WHILE-decidible, PRED(T-WHILE)}
+\begin{block}{Definición 17:  P es un predicado WHILE-decidible, PRED(T-WHILE)}
 \end{block}
 \begin{center}
 PRED(T-WHILE) = \{ $P_f$ | f $\in$ T-WHILE \}    
@@ -1581,7 +1581,7 @@ PRED(T-WHILE) = \{ $P_f$ | f $\in$ T-WHILE \}
 Diremos que P es un predicado WHILE-decidible sii P $\in$ PRED(\textbf{T-WHILE}).
 
 
-\begin{block}{Definición 17:  P es un predicado WHILE-enumerable, PRED(WHILE)}
+\begin{block}{Definición 18:  P es un predicado WHILE-enumerable, PRED(WHILE)}
 \end{block}
 
 \begin{center}
@@ -2088,10 +2088,10 @@ codi: Cód\_While $\rightarrow N$
 
 \[codi(s) = \left\{ \begin{array}{ll} 
             5(i-1) & si\; s = X_i:=0 \\
-            5 \sigma^1_2(i-1, j-1)+1 & si\; s = X_i:= X_j\\
-            5 \sigma^1_2(i-1, j-1)+2 & si\; s = X_i:= X_j +1\\
-            5 \sigma^1_2(i-1, j-1)+3 & si\; s = X_i:= X_j -1\\ 
-            5 \sigma^1_2(i-1, Codi(s_1))+4 & si\;  s = while\; X_i \neq 0 \; do\; s_1\; od
+            5 \sigma^2_1(i-1, j-1)+1 & si\; s = X_i:= X_j\\
+            5 \sigma^2_1(i-1, j-1)+2 & si\; s = X_i:= X_j +1\\
+            5 \sigma^2_1(i-1, j-1)+3 & si\; s = X_i:= X_j -1\\ 
+            5 \sigma^2_1(i-1, Codi(s_1))+4 & si\;  s = while\; X_i \neq 0 \; do\; s_1\; od
             \end{array} \right. \]
 
 \begin{block}{Definición 20: Función codificación de códigos (Codi)  }
